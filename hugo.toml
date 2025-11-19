@@ -3,6 +3,11 @@ languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = 'hugo-PaperMod'
 
+# Use relative URLs for assets so the site works under a subpath on GitHub Pages
+relativeURLs = true
+# Canonify absolute URLs when needed (keeps links absolute to baseURL)
+canonifyURLs = true
+
 [[menus.main]]
 name = 'Blog'
 url = '/posts/'
