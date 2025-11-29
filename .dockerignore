@@ -1,0 +1,8 @@
+.git
+.github
+.devcontainer
+public
+resources
+node_modules
+.DS_Store
+*.log
