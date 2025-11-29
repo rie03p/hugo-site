@@ -1,16 +1,13 @@
-FROM python:3.14-slim AS builder
+# Hugo development environment
+FROM hugomods/hugo:exts-0.146.0
 
-ARG VERSION
-ENV VERSION=${VERSION:-master}
+WORKDIR /src
 
-RUN pip install --upgrade pip
-RUN apt update && apt install -y git
-RUN ln -s /usr/local/bin/python3 /usr/bin/python3
-RUN /usr/bin/python3 -m venv /opt/venv
-RUN /opt/venv/bin/pip install git+https://github.com/eggplants/ghcr-badge@${VERSION}
+# Copy the entire Hugo site
+COPY . /src
 
-FROM gcr.io/distroless/python3-debian12:nonroot
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+# Expose Hugo server port
+EXPOSE 1313
 
-ENTRYPOINT ["ghcr-badge-server"]
+# Run Hugo server with draft enabled and bind to all interfaces
+CMD ["hugo", "server", "--bind", "0.0.0.0", "--baseURL", "http://localhost:1313", "--buildDrafts"]

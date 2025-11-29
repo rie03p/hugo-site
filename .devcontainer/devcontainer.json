@@ -1,11 +1,8 @@
 {
   "name": "Hugo Development",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
-  "postCreateCommand": ".devcontainer/postCreateCommand.sh",
-  "postStartCommand": ".devcontainer/postStartCommand.sh",
+  "dockerComposeFile": ["../compose.yaml", "compose.yaml"],
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces/hugo-site",
   "remoteUser": "vscode",
   "customizations": {
     "vscode": {
